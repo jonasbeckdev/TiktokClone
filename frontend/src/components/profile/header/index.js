@@ -2,12 +2,11 @@ import { useNavigation } from '@react-navigation/native'
 import React from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
 import { Avatar } from 'react-native-paper'
-import { buttonStyles } from '../../../styles'
+import { buttonStyles } from 'styles'
 import styles from './styles'
-import firebase from 'firebase'
 import { Feather } from '@expo/vector-icons'
-import { useFollowing } from '../../../hooks/useFollowing'
-import { useFollowingMutation } from '../../../hooks/useFollowingMutation'
+import { useFollowing, useFollowingMutation } from 'hooks'
+import auth from '@react-native-firebase/auth'
 
 /**
  * Renders the header of the user profile and
@@ -18,10 +17,10 @@ import { useFollowingMutation } from '../../../hooks/useFollowingMutation'
  * @param {Object} props.user information of the user to display 
  * @returns 
  */
-export default function ProfileHeader({ user }) {
+export function ProfileHeader({ user }) {
     const navigation = useNavigation()
 
-    const isFollowing = useFollowing(firebase.auth().currentUser.uid, user.uid).data
+    const isFollowing = useFollowing(auth().currentUser.uid, user.uid).data
     const isFollowingMutation = useFollowingMutation()
     const renderFollowButton = () => {
         if (isFollowing) {
@@ -72,7 +71,7 @@ export default function ProfileHeader({ user }) {
                     <Text style={styles.counterLabelText}>Likes</Text>
                 </View>
             </View>
-            {firebase.auth().currentUser.uid === user.uid ?
+            {auth().currentUser.uid === user.uid ?
                 <TouchableOpacity
                     style={buttonStyles.grayOutlinedButton}
                     onPress={() => navigation.navigate('editProfile')}

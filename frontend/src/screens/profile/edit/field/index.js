@@ -3,12 +3,12 @@ import React, { useState } from 'react'
 import { View, Text, TextInput } from 'react-native'
 import { Divider } from 'react-native-paper'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import NavBarGeneral from '../../../../components/general/navbar'
-import { saveUserField } from '../../../../services/user'
-import { generalStyles } from '../../../../styles'
+import {NavBarGeneral} from 'components'
+import { saveUserField } from 'modules/services'
+import { generalStyles } from 'styles'
 import styles from './styles'
 
-export default function EditProfileFieldScreen({ route }) {
+export function EditProfileFieldScreen({ route }) {
     const { title, field, value } = route.params
     const [textInputValue, setTextInputValue] = useState(value)
     const navigation = useNavigation()

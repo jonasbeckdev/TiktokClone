@@ -1,14 +1,11 @@
-import React, { createContext, useState } from 'react'
-import { View, Text } from 'react-native'
+import React, { useState } from 'react'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
-import FeedScreen from '../../screens/feed'
-import ProfileScreen from '../../screens/profile'
+import {FeedScreen, ProfileScreen} from 'screens'
+import {CurrentUserProfileItemInViewContext} from 'modules/context'
 
 const { Screen, Navigator } = createMaterialTopTabNavigator()
 
-export const CurrentUserProfileItemInViewContext = createContext(null)
-
-const FeedNavigation = () => {
+export const FeedNavigator = () => {
     const [currentUserProfileItemInView, setCurrentUserProfileItemInView] = useState(null)
     return (
         <CurrentUserProfileItemInViewContext.Provider value={currentUserProfileItemInView}>
@@ -29,5 +26,3 @@ const FeedNavigation = () => {
 
     )
 }
-
-export default FeedNavigation

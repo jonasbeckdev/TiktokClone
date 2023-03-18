@@ -1,5 +1,5 @@
 import { useQuery } from 'react-query'
-import { getIsFollowing } from '../services/user'
+import { getIsFollowing } from 'modules/services'
 import { keys } from './queryKeys'
 
 

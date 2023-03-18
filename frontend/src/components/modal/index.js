@@ -1,10 +1,10 @@
 import BottomSheet from '@gorhom/bottom-sheet'
 import React, { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { clearModal } from '../../redux/actions/modal';
+import { clearModal } from 'reduxs/actions';
 import CommentModal from './comment';
 
-const Modal = () => {
+export const Modal = () => {
     const modalState = useSelector(state => state.modal);
     const bottomSheetRef = useRef(null)
     const dispatch = useDispatch();
@@ -39,5 +39,3 @@ const Modal = () => {
         </BottomSheet>
     )
 }
-
-export default Modal

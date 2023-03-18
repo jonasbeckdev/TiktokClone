@@ -1,7 +1,7 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setChats } from '../redux/actions/chat';
-import { chatsListener } from '../services/chat';
+import { setChats } from 'reduxs/actions'
+import { chatsListener } from 'modules/services'
 
 export const useChats = () => {
     const dispatch = useDispatch();

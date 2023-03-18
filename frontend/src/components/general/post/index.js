@@ -1,7 +1,6 @@
 import { Video } from 'expo-av'
 import React, { forwardRef, useEffect, useImperativeHandle, useRef } from 'react'
-import { View, Text } from 'react-native'
-import { useUser } from '../../../hooks/useUser'
+import { useUser } from 'hooks'
 import PostSingleOverlay from './overlay'
 import styles from './styles'
 
@@ -112,5 +111,3 @@ export const PostSingle = forwardRef(({ item }, parentRef) => {
         </>
     )
 })
-
-export default PostSingle

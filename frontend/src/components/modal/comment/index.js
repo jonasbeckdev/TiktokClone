@@ -3,11 +3,11 @@ import { View, Text, Image, TextInput, TouchableOpacity, FlatList } from 'react-
 import { useSelector } from 'react-redux'
 import styles from './styles'
 import { Ionicons } from '@expo/vector-icons'
-import { addComment, clearCommentListener, commentListner } from '../../../services/posts'
+import { addComment, clearCommentListener, commentListner } from 'modules/services'
 import CommentItem from './item'
-import { generalStyles } from '../../../styles'
+import { generalStyles } from 'styles'
 
-const CommentModal = ({ post }) => {
+export const CommentModal = ({ post }) => {
     const [comment, setComment] = useState('')
     const [commentList, setCommentList] = useState('')
     const currentUser = useSelector(state => state.auth.currentUser)
@@ -52,5 +52,3 @@ const CommentModal = ({ post }) => {
         </View>
     )
 }
-
-export default CommentModal

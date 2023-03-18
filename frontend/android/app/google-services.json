@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "976906286216",
+    "firebase_url": "https://flow---development-default-rtdb.firebaseio.com",
+    "project_id": "flow---development",
+    "storage_bucket": "flow---development.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:976906286216:android:d0efb0851f127d5723db3d",
+        "android_client_info": {
+          "package_name": "com.anonymous.frontend"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "976906286216-l2tidil09e3eh41op5dvpf76noukusfj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxnXL1WmQ-Q2r7I6cS1jobR9Mf1f_LDQc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "976906286216-l2tidil09e3eh41op5dvpf76noukusfj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "976906286216-mn0ivr6kqaqj1nulk4vinsnk8h7aubnu.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.anonymous.frontend"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

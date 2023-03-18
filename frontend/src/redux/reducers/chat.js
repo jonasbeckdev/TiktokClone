@@ -1,4 +1,4 @@
-import { CHATS_SET } from '../constants';
+import { CHATS_SET } from '../constants/constants';
 
 const initialState = {
     list: [],

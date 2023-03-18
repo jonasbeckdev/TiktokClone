@@ -1,4 +1,4 @@
-import { CURRENT_USER_POSTS_UPDATE } from '../constants'
+import { CURRENT_USER_POSTS_UPDATE } from '../constants/constants'
 
 const initialState = {
     currentUserPosts: null,

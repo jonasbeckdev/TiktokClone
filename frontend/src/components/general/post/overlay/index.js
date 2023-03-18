@@ -2,11 +2,11 @@ import React, { useEffect, useMemo, useState } from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import styles from "./styles";
 import { Ionicons } from "@expo/vector-icons";
-import { getLikeById, updateLike } from "../../../../services/posts";
+import { getLikeById, updateLike } from "modules/services";
 import { useDispatch, useSelector } from "react-redux";
-import { throttle } from "throttle-debounce";
-import { openCommentModal } from '../../../../redux/actions/modal';
-import { useNavigation } from '@react-navigation/core';
+import { throttle } from "throttle-debounce"
+import { openCommentModal } from 'reduxs/actions'
+import { useNavigation } from '@react-navigation/core'
 
 /**
  * Function that renders a component meant to be overlapped on
@@ -16,7 +16,7 @@ import { useNavigation } from '@react-navigation/core';
  * @param {Object} user that created the post
  * @param {Object} post object
  */
-export default function PostSingleOverlay({ user, post }) {
+export function PostSingleOverlay({ user, post }) {
   const currentUser = useSelector((state) => state.auth.currentUser);
   const dispatch = useDispatch()
   const navigation = useNavigation()

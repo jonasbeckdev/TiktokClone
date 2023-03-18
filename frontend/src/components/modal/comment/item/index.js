@@ -1,12 +1,11 @@
 import React from 'react'
 import { View, Text, Image } from 'react-native'
-import { useUser } from '../../../../hooks/useUser'
-import { generalStyles } from '../../../../styles'
+import { useUser } from 'hooks'
+import { generalStyles } from 'styles'
 import styles from './styles'
 
-const CommentItem = ({ item }) => {
+export const CommentItem = ({ item }) => {
     const user = useUser(item.creator).data
-    console.log(user)
     return (
         <View style={styles.container}>
             <Image style={generalStyles.avatarSmall} source={{ uri: user.photoURL }} />
@@ -18,5 +17,3 @@ const CommentItem = ({ item }) => {
         </View>
     )
 }
-
-export default CommentItem

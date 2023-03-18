@@ -1,10 +1,10 @@
-import { View, Text, FlatList } from 'react-native'
+import { Text, FlatList } from 'react-native'
 import React from 'react'
-import NavBarGeneral from '../../../components/general/navbar'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import ChatListItem from '../../../components/chat/list/item'
+import {NavBarGeneral} from 'components'
+import { ChatListItem, SafeAreaView } from 'react-native-safe-area-context'
 import { useSelector } from 'react-redux'
-const ChatScreen = () => {
+
+export const ChatScreen = () => {
     const chats = useSelector(state => state.chat.list)
 
     const renderItem = ({ item }) => {
@@ -23,5 +23,3 @@ const ChatScreen = () => {
         </SafeAreaView>
     )
 }
-
-export default ChatScreen

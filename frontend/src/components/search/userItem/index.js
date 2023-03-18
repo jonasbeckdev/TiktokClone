@@ -3,7 +3,7 @@ import React from 'react'
 import { View, Text, TouchableOpacity, Image } from 'react-native'
 import styles from './styles'
 
-export default function SearchUserItem({ item }) {
+export function SearchUserItem({ item }) {
     const navigation = useNavigation()
     return (
         <TouchableOpacity

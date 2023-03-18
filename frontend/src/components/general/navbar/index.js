@@ -4,7 +4,7 @@ import styles from './styles'
 import { Feather } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
 
-export default function NavBarGeneral({ title = 'NavBarGeneral', leftButton = { display: true }, rightButton = { display: false } }) {
+export function NavBarGeneral({ title = 'NavBarGeneral', leftButton = { display: true }, rightButton = { display: false } }) {
     const navigation = useNavigation()
     return (
         <View style={styles.container}>

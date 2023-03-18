@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, TextInput, FlatList } from 'react-native'
+import { TextInput, FlatList } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import SearchUserItem from '../../components/search/userItem'
-import { queryUsersByEmail } from '../../services/user'
+import {SearchUserItem} from 'components'
+import { queryUsersByEmail } from '../../modules/services/user'
 import styles from './styles'
 
-const SearchScreen = () => {
+export const SearchScreen = () => {
     const [textInput, setTextInput] = useState('')
     const [searchUsers, setSearchUsers] = useState([])
 
@@ -31,5 +31,3 @@ const SearchScreen = () => {
         </SafeAreaView>
     )
 }
-
-export default SearchScreen

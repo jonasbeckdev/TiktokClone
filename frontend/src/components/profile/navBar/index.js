@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity } from 'react-native'
 import styles from './styles'
 import { Feather } from '@expo/vector-icons'
 
-export default function ProfileNavBar({ user }) {
+export function ProfileNavBar({ user }) {
     return (
         <View style={styles.container}>
             <TouchableOpacity>

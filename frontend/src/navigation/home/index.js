@@ -1,32 +1,22 @@
 import React from 'react'
-import { View, Text } from 'react-native'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
 import { Feather } from '@expo/vector-icons';
-import CameraScreen from '../../screens/camera';
-import ProfileScreen from '../../screens/profile';
-import SearchScreen from '../../screens/search';
-import FeedScreen from '../../screens/feed';
-import FeedNavigation from '../feed';
-import firebase from 'firebase';
-import ChatScreen from '../../screens/chat/list';
-import { useChats } from '../../hooks/useChats';
+import { ChatScreen, SearchScreen, CameraScreen, ProfileScreen } from 'screens'
+import auth from '@react-native-firebase/auth'
+import { FeedNavigator } from '../feed'
+import { useChats } from 'hooks'
 const Tab = createMaterialBottomTabNavigator()
 
-const EmptyScreen = () => {
-    return <View></View>
-}
-
-
-export default function HomeScreen() {
-    useChats();
-
+export function HomeNavigator() {
+    useChats()
+    const initialUserId = auth().currentUser.uid
     return (
         <Tab.Navigator
             barStyle={{ backgroundColor: 'black' }}
             initialRouteName="feed">
             <Tab.Screen
                 name="feed"
-                component={FeedNavigation}
+                component={FeedNavigator}
                 options={{
                     tabBarIcon: ({ color }) => (
                         <Feather name="home" size={24} color={color} />
@@ -68,7 +58,7 @@ export default function HomeScreen() {
                         <Feather name="user" size={24} color={color} />
                     )
                 }}
-                initialParams={{ initialUserId: firebase.auth().currentUser.uid }}
+                initialParams={{initialUserId}}
             />
         </Tab.Navigator>
 

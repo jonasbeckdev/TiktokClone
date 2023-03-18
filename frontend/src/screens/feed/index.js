@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Dimensions, FlatList, View } from 'react-native'
-import useMaterialNavBarHeight from '../../hooks/useMaterialNavBarHeight'
-import PostSingle from '../../components/general/post'
-import { getFeed, getPostsByUserId } from '../../services/posts'
+import {useMaterialNavBarHeight} from 'hooks'
+import {PostSingle} from 'components'
+import { getFeed, getPostsByUserId } from 'modules/services'
 import styles from './styles'
 
 /**
@@ -12,7 +12,7 @@ import styles from './styles'
  * On start make fetch for posts then use a flatList 
  * to display/control the posts.
  */
-export default function FeedScreen({ route }) {
+export function FeedScreen({ route }) {
     const { setCurrentUserProfileItemInView, creator, profile } = route.params
     const [posts, setPosts] = useState([])
     const mediaRefs = useRef([])

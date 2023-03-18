@@ -4,9 +4,9 @@ import { ActivityIndicator, Image, Text, TextInput, TouchableOpacity, View } fro
 import styles from './styles'
 import { Feather } from '@expo/vector-icons'
 import { useDispatch } from 'react-redux'
-import { createPost } from '../../redux/actions'
+import { createPost } from 'reduxs/actions'
 
-export default function SavePostScreen(props) {
+export function SavePostScreen(props) {
     const [description, setDescription] = useState('')
     const [requestRunning, setRequestRunning] = useState(false)
     const navigation = useNavigation()

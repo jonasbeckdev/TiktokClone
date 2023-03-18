@@ -1,12 +1,14 @@
 import { View, Text, TouchableOpacity, Image } from 'react-native'
 import React from 'react'
-import { useUser } from '../../../../hooks/useUser'
-import firebase from 'firebase'
+import { useUser } from 'hooks'
 import styles from './styles'
 import { useNavigation } from '@react-navigation/native'
-const ChatListItem = ({ chat }) => {
+import auth from '@react-native-firebase/auth';
+
+
+export const ChatListItem = ({ chat }) => {
     const navigation = useNavigation()
-    const { data: userData } = useUser(chat.members[0] === firebase.auth().currentUser.uid ? chat.members[1] : chat.members[0])
+    const { data: userData } = useUser(chat.members[0] === auth().currentUser.uid ? chat.members[1] : chat.members[0])
 
     return (
         <TouchableOpacity style={styles.container} onPress={() => navigation.navigate('chatSingle', { chatId: chat.id })}>
@@ -19,5 +21,3 @@ const ChatListItem = ({ chat }) => {
         </TouchableOpacity>
     )
 }
-
-export default ChatListItem

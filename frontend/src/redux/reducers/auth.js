@@ -1,4 +1,4 @@
-import { USER_STATE_CHANGE } from '../constants'
+import { USER_STATE_CHANGE } from '../constants/constants'
 
 const initialState = {
     currentUser: null,

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { View, Text, TouchableOpacity, Image } from 'react-native'
-import { Camera } from 'expo-camera'
+import { Camera, CameraType, FlashMode } from 'expo-camera'
 import { Audio } from 'expo-av'
 import * as ImagePicker from 'expo-image-picker'
 import * as MediaLibrary from 'expo-media-library'
-import * as VideoThumbnails from 'expo-video-thumbnails';
+import * as VideoThumbnails from 'expo-video-thumbnails'
 
 import { useIsFocused } from '@react-navigation/core'
 import { Feather } from '@expo/vector-icons'
@@ -19,7 +19,7 @@ import { useNavigation } from '@react-navigation/native'
  * letting the user pick a video from the gallery
  * @returns Functional Component
  */
-export default function CameraScreen() {
+export function CameraScreen() {
     const [hasCameraPermissions, setHasCameraPermissions] = useState(false)
     const [hasAudioPermissions, setHasAudioPermissions] = useState(false)
     const [hasGalleryPermissions, setHasGalleryPermissions] = useState(false)
@@ -27,23 +27,24 @@ export default function CameraScreen() {
     const [galleryItems, setGalleryItems] = useState([])
 
     const [cameraRef, setCameraRef] = useState(null)
-    const [cameraType, setCameraType] = useState(Camera.Constants.Type.back)
-    const [cameraFlash, setCameraFlash] = useState(Camera.Constants.FlashMode.off)
+    const [cameraPermission, cameraRequestPermission] = Camera.useCameraPermissions();
+    const [cameraType, setCameraType] = useState(CameraType.back);
+    const [cameraFlash, setCameraFlash] = useState(FlashMode.on)
 
     const [isCameraReady, setIsCameraReady] = useState(false)
     const isFocused = useIsFocused()
+    const [mediaPermission, mediaRequestPermission] = MediaLibrary.usePermissions();
 
     const navigation = useNavigation()
     useEffect(() => {
         (async () => {
-            const cameraStatus = await Camera.requestPermissionsAsync()
-            setHasCameraPermissions(cameraStatus.status == 'granted')
-
             const audioStatus = await Audio.requestPermissionsAsync()
             setHasAudioPermissions(audioStatus.status == 'granted')
 
             const galleryStatus = await ImagePicker.requestMediaLibraryPermissionsAsync()
             setHasGalleryPermissions(galleryStatus.status == 'granted')
+            await mediaRequestPermission()
+            await cameraRequestPermission()
 
             if (galleryStatus.status == 'granted') {
                 const userGalleryMedia = await MediaLibrary.getAssetsAsync({ sortBy: ['creationTime'], mediaType: ['video'] })
@@ -90,11 +91,12 @@ export default function CameraScreen() {
     }
 
     const generateThumbnail = async (source) => {
+        console.log('generateThumbnail:', source)
         try {
             const { uri } = await VideoThumbnails.getThumbnailAsync(
                 source,
                 {
-                    time: 5000,
+                    time: 15000,
                 }
             );
             return uri;
@@ -103,11 +105,11 @@ export default function CameraScreen() {
         }
     };
 
-    if (!hasCameraPermissions || !hasAudioPermissions || !hasGalleryPermissions) {
-        return (
-            <View></View>
-        )
-    }
+    // if (!hasCameraPermissions || !hasAudioPermissions || !hasGalleryPermissions) {
+    //     return (
+    //         <View></View>
+    //     )
+    // }
 
     return (
         <View style={styles.container}>
@@ -118,28 +120,27 @@ export default function CameraScreen() {
                     ratio={'16:9'}
                     type={cameraType}
                     flashMode={cameraFlash}
-                    onCameraReady={() => setIsCameraReady(true)}
+                    onCameraReady={() => {
+                        console.log('onCameraReady:')
+                        setIsCameraReady(true)
+                    }}
                 />
                 : null}
 
             <View style={styles.sideBarContainer}>
                 <TouchableOpacity
                     style={styles.sideBarButton}
-                    onPress={() => setCameraType(cameraType === Camera.Constants.Type.back ? Camera.Constants.Type.front : Camera.Constants.Type.back)}>
-
+                    onPress={() => setCameraType(cameraType === CameraType.back ? CameraType.front : CameraType.back)}>
                     <Feather name="refresh-ccw" size={24} color={'white'} />
                     <Text style={styles.iconText}>Flip</Text>
                 </TouchableOpacity>
-
                 <TouchableOpacity
                     style={styles.sideBarButton}
-                    onPress={() => setCameraFlash(cameraFlash === Camera.Constants.FlashMode.off ? Camera.Constants.FlashMode.torch : Camera.Constants.FlashMode.off)}>
-
+                    onPress={() => setCameraFlash(cameraFlash === FlashMode.off ? FlashMode.torch : FlashMode.off)}>
                     <Feather name="zap" size={24} color={'white'} />
                     <Text style={styles.iconText}>Flash</Text>
                 </TouchableOpacity>
             </View>
-
 
             <View style={styles.bottomBarContainer}>
                 <View style={{ flex: 1 }}></View>

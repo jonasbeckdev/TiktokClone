@@ -1,17 +1,13 @@
 import { Ionicons } from '@expo/vector-icons'
 import React, { useState } from 'react'
 import { FlatList, TextInput, TouchableOpacity, View } from 'react-native'
-import { useSelector } from 'react-redux'
-import { addComment } from '../../../services/posts'
-import CommentItem from '../../../components/chat/single/item'
 import styles from './styles'
-import ChatSingleItem from '../../../components/chat/single/item'
-import { useMessages } from '../../../hooks/useMessages'
+import {ChatSingleItem, NavBarGeneral} from 'components'
+import { useMessages } from 'hooks'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import NavBarGeneral from '../../../components/general/navbar'
-import { sendMessage } from '../../../services/chat'
+import { sendMessage } from 'modules/services'
 
-const ChatSingleScreen = ({ route }) => {
+export const ChatSingleScreen = ({ route }) => {
     const { chatId, contactId } = route.params
     const [message, setMessage] = useState('')
 
@@ -50,5 +46,3 @@ const ChatSingleScreen = ({ route }) => {
         </SafeAreaView >
     )
 }
-
-export default ChatSingleScreen

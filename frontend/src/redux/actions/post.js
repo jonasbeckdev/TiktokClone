@@ -1,24 +1,23 @@
 
-import firebase from 'firebase'
-import { saveMediaToStorage } from '../../services/random'
-require('firebase/firebase-auth')
-require('firebase/firestore')
+import auth from '@react-native-firebase/auth'
+import firestore from '@react-native-firebase/firestore'
+import { saveMediaToStorage } from 'modules/services'
 import uuid from 'uuid-random'
-import { CURRENT_USER_POSTS_UPDATE } from '../constants'
+import { CURRENT_USER_POSTS_UPDATE } from '../constants/constants'
 
 export const createPost = (description, video, thumbnail) => dispatch => new Promise((resolve, reject) => {
     let storagePostId = uuid()
+    console.log('createPost:', storagePostId)
     let allSavePromises = Promise.all([
-        saveMediaToStorage(video, `post/${firebase.auth().currentUser.uid}/${storagePostId}/video`),
-        saveMediaToStorage(thumbnail, `post/${firebase.auth().currentUser.uid}/${storagePostId}/thumbnail`)
+        saveMediaToStorage(video, `post/${auth().currentUser.uid}/${storagePostId}/video`),
+        saveMediaToStorage(thumbnail, `post/${auth().currentUser.uid}/${storagePostId}/thumbnail`)
     ])
 
     allSavePromises
         .then((media) => {
-            firebase.firestore()
-                .collection('post')
+            firestore().collection('post')
                 .add({
-                    creator: firebase.auth().currentUser.uid,
+                    creator: v.currentUser.uid,
                     media,
                     description,
                     likesCount: 0,
@@ -30,8 +29,8 @@ export const createPost = (description, video, thumbnail) => dispatch => new Pro
         })
         .catch(() => reject())
 })
-export const getPostsByUser = (uid = firebase.auth().currentUser.uid) => dispatch => new Promise((resolve, reject) => {
-    firebase.firestore()
+export const getPostsByUser = (uid = auth().currentUser.uid) => dispatch => new Promise((resolve, reject) => {
+    firestore()
         .collection('post')
         .where('creator', '==', uid)
         .orderBy('creation', 'desc')

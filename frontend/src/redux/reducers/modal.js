@@ -1,4 +1,4 @@
-import { CLEAR_MODAL, MODAL_OPEN_COMMENT_SECTION } from '../constants';
+import { CLEAR_MODAL, MODAL_OPEN_COMMENT_SECTION } from '../constants/constants';
 
 const initialState = {
     open: false,

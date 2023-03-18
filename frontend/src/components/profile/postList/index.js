@@ -3,7 +3,7 @@ import { View, Text, FlatList } from 'react-native'
 import ProfilePostListItem from './item'
 import styles from './styles'
 
-export default function ProfilePostList({ posts }) {
+export function ProfilePostList({ posts }) {
     return (
         <View style={styles.container}>
             <FlatList

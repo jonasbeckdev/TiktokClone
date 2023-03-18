@@ -1,5 +1,5 @@
 import { useQuery } from 'react-query'
-import { getUserById } from '../services/user'
+import { getUserById } from 'modules/services'
 import { keys, USER_KEY } from './queryKeys'
 
 

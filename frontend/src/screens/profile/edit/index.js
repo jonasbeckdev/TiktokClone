@@ -4,14 +4,14 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import styles from './styles'
 import { Feather } from '@expo/vector-icons'
 import * as ImagePicker from 'expo-image-picker'
-import { saveUserProfileImage } from '../../../services/user'
+import { saveUserProfileImage } from 'modules/services'
 import { useSelector } from 'react-redux'
 import { useNavigation } from '@react-navigation/native'
-import NavBarGeneral from '../../../components/general/navbar'
+import {NavBarGeneral} from 'components'
 
 
-export default function EditProfileScreen() {
-    const auth = useSelector(state => state.auth)
+export function EditProfileScreen() {
+    const currentUserObj = useSelector(state => state.auth)
     const navigation = useNavigation()
     const chooseImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
@@ -34,7 +34,7 @@ export default function EditProfileScreen() {
                 >
                     <Image
                         style={styles.image}
-                        source={{ uri: auth.currentUser.photoURL }} />
+                        source={{ uri: currentUserObj.currentUser.photoURL }} />
                     <View style={styles.imageOverlay} />
                     <Feather name='camera' size={26} color='white' />
                 </TouchableOpacity>
@@ -43,10 +43,10 @@ export default function EditProfileScreen() {
             <View style={styles.fieldsContainer}>
                 <TouchableOpacity
                     style={styles.fieldItemContainer}
-                    onPress={() => navigation.navigate('editProfileField', { title: 'Display Name', field: 'displayName', value: auth.currentUser.displayName })}>
+                    onPress={() => navigation.navigate('editProfileField', { title: 'Display Name', field: 'displayName', value: currentUserObj().currentUser.displayName })}>
                     <Text>Display Name</Text>
                     <View style={styles.fieldValueContainer}>
-                        <Text>{auth.currentUser.displayName}</Text>
+                        <Text>{currentUserObj.currentUser.displayName}</Text>
                         <Feather name='chevron-right' size={20} color='gray' />
                     </View>
                 </TouchableOpacity>

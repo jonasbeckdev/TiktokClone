@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createChat, messagesListener } from '../services/chat';
+import { createChat, messagesListener } from 'modules/services';
 
 export const useMessages = (chatId, contactId) => {
     const dispatch = useDispatch();

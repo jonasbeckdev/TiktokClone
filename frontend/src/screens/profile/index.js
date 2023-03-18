@@ -1,35 +1,28 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { View, Text, ScrollView } from 'react-native'
-import { useSelector } from 'react-redux'
 import styles from './styles'
-import ProfileNavBar from '../../components/profile/navBar'
-import ProfileHeader from '../../components/profile/header'
-import ProfilePostList from '../../components/profile/postList'
+import {ProfileNavBar, ProfileHeader, ProfilePostList} from 'components'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { CurrentUserProfileItemInViewContext } from '../../navigation/feed'
-import { useUser } from '../../hooks/useUser'
-import { getPostsByUserId } from '../../services/posts'
+import { CurrentUserProfileItemInViewContext } from 'modules/context'
+import { useUser } from 'hooks'
+import { getPostsByUserId } from 'modules/services'
 
 
-export default function ProfileScreen({ route }) {
+export function ProfileScreen({ route }) {
     const { initialUserId } = route.params
     const [userPosts, setUserPosts] = useState([])
 
-    let providerUserId = null
-    if (CurrentUserProfileItemInViewContext != null) {
-        providerUserId = useContext(CurrentUserProfileItemInViewContext)
-    }
+    const providerUserId = useContext(CurrentUserProfileItemInViewContext)
 
-    const user = useUser(initialUserId ? initialUserId : providerUserId).data;
+    const user = useUser(initialUserId ? initialUserId : providerUserId).data
+
     useEffect(() => {
-        if (user === undefined) {
-            return;
+        if (user) {
+            getPostsByUserId(user.uid).then(setUserPosts)
         }
-        getPostsByUserId(user.uid).then(setUserPosts)
-
     }, [user])
 
-    if (user === undefined) {
+    if (!user) {
         return <></>
     }
     return (
