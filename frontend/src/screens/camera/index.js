@@ -63,6 +63,7 @@ export function CameraScreen() {
                     const data = await videoRecordPromise;
                     const source = data.uri
                     let sourceThumb = await generateThumbnail(source)
+                    console.log('generateThumbnail:', source, sourceThumb)
                     navigation.navigate('savePost', { source, sourceThumb })
                 }
             } catch (error) {
@@ -101,7 +102,7 @@ export function CameraScreen() {
             );
             return uri;
         } catch (e) {
-            console.warn(e);
+            console.log('generateThumbnail:', e);
         }
     };
 

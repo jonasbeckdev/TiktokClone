@@ -25,13 +25,14 @@ export function ProfileScreen({ route }) {
     if (!user) {
         return <></>
     }
+    console.log('userPosts:', userPosts)
     return (
         <SafeAreaView style={styles.container}>
             <ProfileNavBar user={user} />
-            <ScrollView>
+            {/* <ScrollView> */}
                 <ProfileHeader user={user} />
                 <ProfilePostList posts={userPosts} />
-            </ScrollView>
+            {/* </ScrollView> */}
         </SafeAreaView>
     )
 }

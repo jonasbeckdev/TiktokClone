@@ -77,7 +77,7 @@ export const addComment = (postId, creator, comment) => {
 }
 
 export const commentListner = (postId, setCommentList) => {
-  commentListnerInstance = db
+  commentListnerInstance = firestore()
     .collection('post')
     .doc(postId)
     .collection('comments')

@@ -39,12 +39,12 @@ export function Route() {
                 {currentUserObj.currentUser ?
                     <>
                         <Stack.Screen name="home" component={HomeNavigator} options={{ headerShown: false }} />
-                        {/* <Stack.Screen name="savePost" component={SavePostScreen} options={{ headerShown: false }} />
+                        <Stack.Screen name="savePost" component={SavePostScreen} options={{ headerShown: false }} />
                         <Stack.Screen name="userPosts" component={FeedScreen} options={{ headerShown: false }} />
                         <Stack.Screen name="profileOther" component={ProfileScreen} options={{ headerShown: false }} />
                         <Stack.Screen name="editProfile" component={EditProfileScreen} options={{ headerShown: false }} />
                         <Stack.Screen name="editProfileField" component={EditProfileFieldScreen} options={{ headerShown: false }} />
-                        <Stack.Screen name="chatSingle" component={ChatSingleScreen} options={{ headerShown: false }} /> */}
+                        <Stack.Screen name="chatSingle" component={ChatSingleScreen} options={{ headerShown: false }} />
                     </>
                     :
                     <Stack.Screen name="auth" component={AuthScreen} options={{ headerShown: false }} />

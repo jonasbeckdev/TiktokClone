@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Text, FlatList } from 'react-native'
-import ProfilePostListItem from './item'
+import {ProfilePostListItem} from './item'
 import styles from './styles'
 
 export function ProfilePostList({ posts }) {

@@ -7,27 +7,29 @@ import { CURRENT_USER_POSTS_UPDATE } from '../constants/constants'
 
 export const createPost = (description, video, thumbnail) => dispatch => new Promise((resolve, reject) => {
     let storagePostId = uuid()
-    console.log('createPost:', storagePostId)
     let allSavePromises = Promise.all([
         saveMediaToStorage(video, `post/${auth().currentUser.uid}/${storagePostId}/video`),
-        saveMediaToStorage(thumbnail, `post/${auth().currentUser.uid}/${storagePostId}/thumbnail`)
+        // saveMediaToStorage(thumbnail, `post/${auth().currentUser.uid}/${storagePostId}/thumbnail`)
     ])
 
     allSavePromises
         .then((media) => {
             firestore().collection('post')
                 .add({
-                    creator: v.currentUser.uid,
+                    creator: auth().currentUser.uid,
                     media,
                     description,
                     likesCount: 0,
                     commentsCount: 0,
-                    creation: firebase.firestore.FieldValue.serverTimestamp()
+                    creation: Date.now()
                 })
                 .then(() => resolve())
                 .catch(() => reject())
         })
-        .catch(() => reject())
+        .catch((error) => {
+            console.log('allSavePromises:', error)
+            reject()
+        })
 })
 export const getPostsByUser = (uid = auth().currentUser.uid) => dispatch => new Promise((resolve, reject) => {
     firestore()

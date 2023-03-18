@@ -1,7 +1,8 @@
 import { useNavigation } from '@react-navigation/core';
 import React from 'react'
 import { View, Text, Image, TouchableOpacity } from 'react-native'
-import styles from './styles';
+import styles from './styles'
+
 export function ProfilePostListItem({ item }) {
     const navigation = useNavigation()
     return (

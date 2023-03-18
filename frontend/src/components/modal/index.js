@@ -2,7 +2,7 @@ import BottomSheet from '@gorhom/bottom-sheet'
 import React, { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { clearModal } from 'reduxs/actions';
-import CommentModal from './comment';
+import {CommentModal} from './comment';
 
 export const Modal = () => {
     const modalState = useSelector(state => state.modal);

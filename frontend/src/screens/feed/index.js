@@ -57,6 +57,7 @@ export function FeedScreen({ route }) {
      * @returns 
      */
     const renderItem = ({ item, index }) => {
+        console.log('renderItem:', item)
         return (
             <View style={{ height: feedItemHeight, backgroundColor: 'black' }}>
                 <PostSingle item={item} ref={PostSingleRef => (mediaRefs.current[item.id] = PostSingleRef)} />
@@ -64,23 +65,24 @@ export function FeedScreen({ route }) {
         )
     }
 
+    console.log('posts:', posts)
+
     return (
-        <View style={styles.container}>
-            <FlatList
-                data={posts}
-                windowSize={4}
-                initialNumToRender={0}
-                maxToRenderPerBatch={2}
-                removeClippedSubviews
-                viewabilityConfig={{
-                    itemVisiblePercentThreshold: 0
-                }}
-                renderItem={renderItem}
-                pagingEnabled
-                keyExtractor={item => item.id}
-                decelerationRate={'normal'}
-                onViewableItemsChanged={onViewableItemsChanged.current}
-            />
-        </View>
+        <FlatList
+            style={{flex: 1}}
+            data={posts}
+            windowSize={4}
+            // initialNumToRender={0}
+            maxToRenderPerBatch={2}
+            removeClippedSubviews
+            viewabilityConfig={{
+                itemVisiblePercentThreshold: 0
+            }}
+            renderItem={renderItem}
+            pagingEnabled
+            keyExtractor={item => item.id}
+            decelerationRate={'normal'}
+            onViewableItemsChanged={onViewableItemsChanged.current}
+        />
     )
 }

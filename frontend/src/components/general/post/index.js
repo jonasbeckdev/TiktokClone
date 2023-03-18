@@ -1,7 +1,7 @@
 import { Video } from 'expo-av'
 import React, { forwardRef, useEffect, useImperativeHandle, useRef } from 'react'
 import { useUser } from 'hooks'
-import PostSingleOverlay from './overlay'
+import {PostSingleOverlay} from './overlay'
 import styles from './styles'
 
 /**

@@ -41,20 +41,30 @@ export function PostSingleOverlay({ user, post }) {
    * is optimistic, meaning we don't wait for a response from the
    * server and always assume the write/delete action is successful
    */
-  const handleUpdateLike = useMemo(
-    () =>
-      throttle(500, true, (currentLikeStateInst) => {
-        setCurrentLikeState({
-          state: !currentLikeStateInst.state,
-          counter:
-            currentLikeStateInst.counter +
-            (currentLikeStateInst.state ? -1 : 1),
-        });
-        updateLike(post.id, currentUser.uid, currentLikeStateInst.state);
-      }),
-    []
-  );
+  const handleUpdateLike = ()=>{
+    setCurrentLikeState({
+      state: !currentLikeState.state,
+      counter:
+      currentLikeState.counter +
+        (currentLikeState.state ? -1 : 1),
+    });
+    updateLike(post.id, currentUser.uid, currentLikeState.state);
 
+  }
+
+  // const handleUpdateLike = useMemo(
+  //   () =>
+  //     throttle(500, true, (currentLikeState) => {
+  //       setCurrentLikeState({
+  //         state: !currentLikeState.state,
+  //         counter:
+  //           currentLikeState.counter +
+  //           (currentLikeState.state ? -1 : 1),
+  //       });
+  //       updateLike(post.id, currentUser.uid, currentLikeState.state);
+  //     }),
+  //   []
+  // );
   return (
     <View style={styles.container}>
       <View>
@@ -70,7 +80,9 @@ export function PostSingleOverlay({ user, post }) {
 
         <TouchableOpacity
           style={styles.actionButton}
-          onPress={() => handleUpdateLike(currentLikeState)}
+          onPress={() => {
+            handleUpdateLike(currentLikeState)
+          }}
         >
           <Ionicons
             color="white"

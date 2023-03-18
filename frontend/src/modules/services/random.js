@@ -1,12 +1,9 @@
-
-import storage from '@react-native-firebase/storage';
+import storage from '@react-native-firebase/storage'
 
 export const saveMediaToStorage = (media, path) => new Promise((resolve, reject) => {
     const fileRef = storage().ref().child(path)
-    fetch(media)
-        .then(response => response.blob())
-        .then(blob => fileRef.put(blob))
-        .then(task => task.ref.getDownloadURL())
-        .then(downloadUrl => resolve(downloadUrl))
-        .catch(() => reject())
+    console.log('saveMediaToStorage:', media)
+    fileRef.putFile(media).then(()=>{
+        fileRef.getDownloadURL().then(downloadUrl => resolve(downloadUrl)).catch(error=>reject(error))
+    }).catch(error=>reject(error))
 })
