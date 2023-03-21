@@ -6,7 +6,8 @@ import { Feather } from '@expo/vector-icons'
 import { useDispatch } from 'react-redux'
 import { createPost } from 'reduxs/actions'
 
-export function SavePostScreen(props) {
+export function SavePostScreen({route}) {
+    const {source, sourceThumb} = route.params
     const [description, setDescription] = useState('')
     const [requestRunning, setRequestRunning] = useState(false)
     const navigation = useNavigation()
@@ -14,7 +15,7 @@ export function SavePostScreen(props) {
     const dispatch = useDispatch();
     const handleSavePost = () => {
         setRequestRunning(true)
-        dispatch(createPost(description, props.route.params.source, props.route.params.sourceThumb))
+        dispatch(createPost(description, source, sourceThumb))
             .then(() => navigation.dispatch(StackActions.popToTop()))
             .catch(() => setRequestRunning(false))
     }
@@ -38,7 +39,7 @@ export function SavePostScreen(props) {
                 />
                 <Image
                     style={styles.mediaPreview}
-                    source={{ uri: props.route.params.source }}
+                    source={{ uri: sourceThumb }}
                 />
             </View>
             <View style={styles.spacer} />
@@ -49,7 +50,6 @@ export function SavePostScreen(props) {
                     <Feather name="x" size={24} color="black" />
                     <Text style={styles.cancelButtonText}>Cancel</Text>
                 </TouchableOpacity>
-
                 <TouchableOpacity
                     onPress={() => handleSavePost()}
                     style={styles.postButton}>

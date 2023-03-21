@@ -58,14 +58,11 @@ export function CameraScreen() {
         if (cameraRef) {
             try {
                 const options = { maxDuration: 60, quality: Camera.Constants.VideoQuality['480'] }
-                const videoRecordPromise = cameraRef.recordAsync(options)
-                if (videoRecordPromise) {
-                    const data = await videoRecordPromise;
-                    const source = data.uri
-                    let sourceThumb = await generateThumbnail(source)
-                    console.log('generateThumbnail:', source, sourceThumb)
-                    navigation.navigate('savePost', { source, sourceThumb })
-                }
+                const data = await cameraRef.recordAsync(options)
+                const source = data.uri
+                let sourceThumb = await generateThumbnail(source)
+                console.log('sourceThumb:', sourceThumb)
+                navigation.navigate('savePost', { source, sourceThumb })
             } catch (error) {
                 console.warn(error)
             }
@@ -97,12 +94,12 @@ export function CameraScreen() {
             const { uri } = await VideoThumbnails.getThumbnailAsync(
                 source,
                 {
-                    time: 15000,
+                    time: 100,
                 }
             );
             return uri;
         } catch (e) {
-            console.log('generateThumbnail:', e);
+            console.log('generateThumbnail:', e.message);
         }
     };
 
@@ -122,7 +119,6 @@ export function CameraScreen() {
                     type={cameraType}
                     flashMode={cameraFlash}
                     onCameraReady={() => {
-                        console.log('onCameraReady:')
                         setIsCameraReady(true)
                     }}
                 />
